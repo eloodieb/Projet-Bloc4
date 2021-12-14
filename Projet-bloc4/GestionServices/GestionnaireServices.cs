@@ -10,7 +10,7 @@ namespace Projet_bloc4.GestionServices
     public class GestionnaireServices
     {
         //Création d'une liste de services
-        List<Service> list_services = new List<Service>();
+        static List<Service> list_services = new List<Service>();
         private static int ServicesNumber;
         public int AddService(Service service)
         {
@@ -19,6 +19,7 @@ namespace Projet_bloc4.GestionServices
             else
             {
                 service.Id = ++GestionnaireServices.ServicesNumber;
+                service.CreationDate = DateTime.Now;
                 list_services.Add(service);
             }
             return service.Id;
@@ -37,6 +38,7 @@ namespace Projet_bloc4.GestionServices
           
             Service s = this.SearchServiceById(service.Id);
 
+            service.UpdateDate = DateTime.Now;
             list_services.Insert(list_services.IndexOf(s), service);
             
            
@@ -53,6 +55,43 @@ namespace Projet_bloc4.GestionServices
         public List<Service> GetServices()
         {
             return list_services;
+        }
+
+        public Service Start()
+        {
+            if (list_services.Count > 0)
+                return list_services[0];
+            else
+                return null;
+        }
+
+        public Service Next(int id)
+        {
+            Service service = this.SearchServiceById(id);
+            int index = list_services.IndexOf(service);
+            if ((list_services.Count - 1) >= (index + 1))
+                return list_services[index + 1];
+            else
+                return null;
+
+        }
+
+        public Service Previous(int id)
+        {
+            Service service = this.SearchServiceById(id);
+            int index = list_services.IndexOf(service);
+            if ((list_services.Count - 1) >= (index - 1) && index > 0)
+                return list_services[index - 1];
+            else
+                return null;
+        }
+
+        public Service End()
+        {
+            if (list_services.Count > 0)
+                return list_services[list_services.Count - 1];
+            else
+                return null;
         }
     }
 }

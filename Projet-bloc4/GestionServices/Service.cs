@@ -11,11 +11,11 @@ namespace Projet_bloc4.GestionServices
         int id;
         string name;
         DateTime creationDate;
-        DateTime updateTime;
+        DateTime updateDate;
 
         public int Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
         public DateTime CreationDate { get => creationDate; set => creationDate = value; }
-        public DateTime UpdateTime { get => updateTime; set => updateTime = value; }
+        public DateTime UpdateDate { get => updateDate; set => updateDate = value; }
     }
 }
