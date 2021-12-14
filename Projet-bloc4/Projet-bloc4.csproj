@@ -50,6 +50,8 @@
     <Compile Include="Exceptions\AddExistingSiteException.cs" />
     <Compile Include="Exceptions\UpdateInexistingService.cs" />
     <Compile Include="Exceptions\UpdateInexistingSite.cs" />
+    <Compile Include="GestionEmployees\Employee.cs" />
+    <Compile Include="GestionEmployees\GestionnaireEmployees.cs" />
     <Compile Include="GestionServices\GestionnaireServices.cs" />
     <Compile Include="GestionServices\Service.cs" />
     <Compile Include="GestionSites\GestionnairesSites.cs" />
