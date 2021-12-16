@@ -46,8 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\AddExistingEmployeeException.cs" />
     <Compile Include="Exceptions\AddExistingServiceException.cs" />
     <Compile Include="Exceptions\AddExistingSiteException.cs" />
+    <Compile Include="Exceptions\UpdateInexistingEmployee.cs" />
     <Compile Include="Exceptions\UpdateInexistingService.cs" />
     <Compile Include="Exceptions\UpdateInexistingSite.cs" />
     <Compile Include="GestionEmployees\Employee.cs" />
