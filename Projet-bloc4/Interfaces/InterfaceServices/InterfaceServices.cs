@@ -51,7 +51,6 @@ namespace Projet_bloc4.Interfaces.InterfaceServices
                 if (service.UpdateDate.Year != 1)
                     lbl_update_date.Text = service.UpdateDate.ToShortDateString();
             }
-
         }
 
         private void bt_previous_Click(object sender, EventArgs e)

@@ -40,6 +40,8 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.bt_register = new System.Windows.Forms.Button();
             this.bt_add = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txt_service = new System.Windows.Forms.ListBox();
+            this.txt_site = new System.Windows.Forms.ListBox();
             this.lbl_email = new System.Windows.Forms.Label();
             this.txt_email = new System.Windows.Forms.TextBox();
             this.lbl_site = new System.Windows.Forms.Label();
@@ -56,8 +58,6 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.txt_name = new System.Windows.Forms.TextBox();
             this.lbl_creation_date = new System.Windows.Forms.Label();
             this.lbl_update_date = new System.Windows.Forms.Label();
-            this.txt_site = new System.Windows.Forms.ListBox();
-            this.txt_service = new System.Windows.Forms.ListBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -190,6 +190,25 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Salariés";
+            // 
+            // txt_service
+            // 
+            this.txt_service.FormattingEnabled = true;
+            this.txt_service.ItemHeight = 20;
+            this.txt_service.Location = new System.Drawing.Point(222, 251);
+            this.txt_service.Name = "txt_service";
+            this.txt_service.Size = new System.Drawing.Size(166, 24);
+            this.txt_service.TabIndex = 19;
+
+            // 
+            // txt_site
+            // 
+            this.txt_site.FormattingEnabled = true;
+            this.txt_site.ItemHeight = 20;
+            this.txt_site.Location = new System.Drawing.Point(222, 289);
+            this.txt_site.Name = "txt_site";
+            this.txt_site.Size = new System.Drawing.Size(166, 24);
+            this.txt_site.TabIndex = 18;
             // 
             // lbl_email
             // 
@@ -324,30 +343,6 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.lbl_update_date.Size = new System.Drawing.Size(14, 20);
             this.lbl_update_date.TabIndex = 5;
             this.lbl_update_date.Text = "-";
-            // 
-            // txt_site
-            // 
-            this.txt_site.FormattingEnabled = true;
-            this.txt_site.ItemHeight = 20;
-            this.txt_site.Items.AddRange(new object[] {
-            "Lyon",
-            "Paris"});
-            this.txt_site.Location = new System.Drawing.Point(222, 289);
-            this.txt_site.Name = "txt_site";
-            this.txt_site.Size = new System.Drawing.Size(166, 24);
-            this.txt_site.TabIndex = 18;
-            // 
-            // txt_service
-            // 
-            this.txt_service.FormattingEnabled = true;
-            this.txt_service.ItemHeight = 20;
-            this.txt_service.Items.AddRange(new object[] {
-            "Informatique",
-            "Comptabilité"});
-            this.txt_service.Location = new System.Drawing.Point(222, 251);
-            this.txt_service.Name = "txt_service";
-            this.txt_service.Size = new System.Drawing.Size(166, 24);
-            this.txt_service.TabIndex = 19;
             // 
             // InterfaceEmployees
             // 

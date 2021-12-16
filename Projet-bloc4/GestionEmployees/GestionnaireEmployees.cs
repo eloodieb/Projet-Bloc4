@@ -1,6 +1,7 @@
 ﻿using Projet_bloc4.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,9 @@ namespace Projet_bloc4.GestionEmployees
        static  List<Employee> list_employees = new List<Employee>();
 
         private static int EmployeesNumber;
+        //Connexion à la base de données
+        static string connexionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Elodie\source\repos\Projet-bloc4\Projet-bloc4\projet4.mdf;Integrated Security=True;Connect Timeout=30";
+        SqlConnection con = new SqlConnection(connexionString);
 
         public int AddEmployee(Employee employee)
         {
@@ -22,6 +26,25 @@ namespace Projet_bloc4.GestionEmployees
                 employee.Id = ++GestionnaireEmployees.EmployeesNumber;
                 employee.CreationDate = DateTime.Now;
                 list_employees.Add(employee);
+
+                //Ouverture de la connexion
+                con.Open();
+                SqlCommand cmd = new SqlCommand("insert into Employees values (@Id, @name, @firstname, @phoneNumber, @mobileNumber, @email, @idSite, @idService)", con);
+                cmd.Parameters.AddWithValue("@Id", employee.Id);
+                cmd.Parameters.AddWithValue("@name", employee.Name);
+                cmd.Parameters.AddWithValue("@firstname", employee.Firstname);
+                cmd.Parameters.AddWithValue("@phoneNumber", employee.MobilePhone);
+                cmd.Parameters.AddWithValue("@mobileNumber", employee.PhoneNumber);
+                cmd.Parameters.AddWithValue("@email", employee.Email);
+                cmd.Parameters.AddWithValue("@idSite", employee.Site);
+                cmd.Parameters.AddWithValue("@idService", employee.Service);
+
+                //Exécute la requête sql
+                cmd.ExecuteNonQuery();
+
+                // Fermeture Connexion
+                con.Close();
+            
             }
             return employee.Id;
         }
@@ -43,6 +66,16 @@ namespace Projet_bloc4.GestionEmployees
         {
             Employee employee = this.SearchEmployeeById(id);
             list_employees.Remove(employee);
+
+            //Ouverture de la connexion
+            con.Open();
+            SqlCommand cmd = new SqlCommand("Delete from Employees where Id = employee.Id", con);
+            //Exécute la requête sql
+            cmd.ExecuteNonQuery();
+
+            // Fermeture Connexion
+            con.Close();
+
         }
 
         public Employee SearchEmployeeById(int id)

@@ -1,6 +1,7 @@
 ﻿using Projet_bloc4.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,10 @@ namespace Projet_bloc4.GestionSites
     public class GestionnairesSites
     {
         static List<Site> list_sites = new List<Site>();
+        //Connexion à la base de données
+        static string connexionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Elodie\source\repos\Projet-bloc4\Projet-bloc4\projet4.mdf;Integrated Security=True;Connect Timeout=30";
+        SqlConnection con = new SqlConnection(connexionString);
 
-    
         private static int SitesNumber;
  
         // Ajoute un site
@@ -24,6 +27,18 @@ namespace Projet_bloc4.GestionSites
                 site.Id = ++GestionnairesSites.SitesNumber;
                 site.CreationDate = DateTime.Now;
                 list_sites.Add(site);
+
+                //Ouverture de la connexion
+                con.Open();
+                SqlCommand cmd = new SqlCommand("insert into Sites values (@Id, @city)", con);
+                cmd.Parameters.AddWithValue("@Id", site.Id);
+                cmd.Parameters.AddWithValue("@name", site.Name);
+
+                //Exécute la requête sql
+                cmd.ExecuteNonQuery();
+
+                // Fermeture Connexion
+                con.Close();
             }
 
             return site.Id;
