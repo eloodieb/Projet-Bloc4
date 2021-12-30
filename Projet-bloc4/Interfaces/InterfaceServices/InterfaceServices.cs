@@ -88,7 +88,7 @@ namespace Projet_bloc4.Interfaces.InterfaceServices
             try
             {
                 
-                   int id = int.Parse(lbl_id.Text);
+                int id = int.Parse(lbl_id.Text);
                 Service service = new GestionnaireServices().SearchServiceById(id);
                 service.Name = txt_service.Text;
                 new GestionnaireServices().UpdateService(service);
@@ -113,6 +113,7 @@ namespace Projet_bloc4.Interfaces.InterfaceServices
             {
                 MessageBox.Show("Le label id est vide");
             }
+
         }
     }
 }

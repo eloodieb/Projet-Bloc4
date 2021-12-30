@@ -53,15 +53,15 @@ namespace Projet_bloc4.GestionServices
         public void DeleteService(int id)
         {
             Service service = this.SearchServiceById(id);
-  
+            
             //Connexion à la base de données
             string connexionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Elodie\source\repos\Projet-bloc4\Projet-bloc4\projet4.mdf;Integrated Security=True;Connect Timeout=30";
             SqlConnection con = new SqlConnection(connexionString);
 
             //Ouverture de la connexion
             con.Open();
-            SqlCommand cmd = new SqlCommand("Delete from Services INNER JOIN Employees ON (Services.Id = Employees.idService) where Services.Id = @id", con);
-
+           
+            SqlCommand cmd = new SqlCommand("Delete Services from Services LEFT OUTER JOIN  Employees ON (Services.Id = Employees.idService) where Employees.idService IS NULL And Services.Id = @id", con);
             cmd.Parameters.AddWithValue("@id", service.Id);
 
             //Exécute la requête sql
