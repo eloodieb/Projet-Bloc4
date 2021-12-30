@@ -46,8 +46,23 @@ namespace Projet_bloc4.GestionSites
         //Supprime un site par son Id
         public void DeleteSiteById(int id)
         {
+            /* Site site = this.SearchSiteById(id);
+             list_sites.Remove(site);*/
+
             Site site = this.SearchSiteById(id);
-            list_sites.Remove(site);
+
+
+            //Ouverture de la connexion
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("Delete Sites from Sites LEFT OUTER JOIN  Employees ON (Sites.Id = Employees.idSite) where Employees.idSite IS NULL And Sites.Id = @id", con);
+            cmd.Parameters.AddWithValue("@id", site.Id);
+
+            //Exécute la requête sql
+            cmd.ExecuteNonQuery();
+
+            // Fermeture Connexion
+            con.Close();
         }
 
         //Modifie un site

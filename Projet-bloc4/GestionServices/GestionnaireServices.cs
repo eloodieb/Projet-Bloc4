@@ -7,6 +7,7 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 using Projet_bloc4;
+using System.Windows.Forms;
 
 namespace Projet_bloc4.GestionServices
 {
@@ -21,15 +22,16 @@ namespace Projet_bloc4.GestionServices
         //private static int ServicesNumber;
         public int AddService(Service service)
         {
-           /*if (service.Id != 0)
+           if (service.Id != 0)
                 throw new AddExistingServiceException("Impossible d'ajouter un projet déjà existant");
-            else
+            /*else
             {
                 service.Id = ++GestionnaireServices.ServicesNumber;
                 service.CreationDate = DateTime.Now;
                 list_services.Add(service);
             }*/
 
+                
                 //Connexion à la base de données
                 string connexionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Elodie\source\repos\Projet-bloc4\Projet-bloc4\projet4.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlConnection con = new SqlConnection(connexionString);
@@ -41,35 +43,47 @@ namespace Projet_bloc4.GestionServices
 
                 //Exécute la requête sql
                 int res = cmd.ExecuteNonQuery();
-              
+                 
             // Fermeture Connexion
             con.Close();
-            
+          
             return res;
-            //s return service.Id
+            //return service.Id
            
         }
 
         public void DeleteService(int id)
         {
-            Service service = this.SearchServiceById(id);
-            
-            //Connexion à la base de données
-            string connexionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Elodie\source\repos\Projet-bloc4\Projet-bloc4\projet4.mdf;Integrated Security=True;Connect Timeout=30";
-            SqlConnection con = new SqlConnection(connexionString);
+          
+                 Service service = this.SearchServiceById(id);
 
-            //Ouverture de la connexion
-            con.Open();
+                //Connexion à la base de données
+                string connexionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Elodie\source\repos\Projet-bloc4\Projet-bloc4\projet4.mdf;Integrated Security=True;Connect Timeout=30";
+                SqlConnection con = new SqlConnection(connexionString);
+
+                //Ouverture de la connexion
+                
+
+                SqlCommand cmd = new SqlCommand("Delete Services from Services LEFT OUTER JOIN  Employees ON (Services.Id = Employees.idService) where Employees.idService IS NULL And Services.Id = @id", con);
+                cmd.Parameters.AddWithValue("@id", service.Id);
+
+                //Exécute la requête sql
            
-            SqlCommand cmd = new SqlCommand("Delete Services from Services LEFT OUTER JOIN  Employees ON (Services.Id = Employees.idService) where Employees.idService IS NULL And Services.Id = @id", con);
-            cmd.Parameters.AddWithValue("@id", service.Id);
+                con.Open();
+                var result = cmd.ExecuteNonQuery();
+                if (result == 1)
+                    Console.WriteLine("Service supprimé");
+            
+                else
+                MessageBox.Show("Impossible de supprimer un projet déjà existant");
+               
+            
+          
 
-            //Exécute la requête sql
-            cmd.ExecuteNonQuery();
+                // Fermeture Connexion
+                con.Close();
 
-            // Fermeture Connexion
-            con.Close();
-       
+          
         }
 
         public void UpdateService(Service service)
@@ -128,6 +142,7 @@ namespace Projet_bloc4.GestionServices
                
                         while (rdr.Read())
                         {
+
                             Service service = new Service();
                             service.Id = rdr.GetInt32(0);
                             service.Name = rdr.GetString(1);
@@ -146,10 +161,14 @@ namespace Projet_bloc4.GestionServices
         public Service Start()
         {
             if (GetServices().Count > 0)
+            {
                 return GetServices()[0];
+            }
+                
+                
             else
                 return null;
-
+         
             
         }
 
@@ -161,7 +180,7 @@ namespace Projet_bloc4.GestionServices
                 return GetServices()[index + 1];
             else
                 return null;
-
+            
         }
 
         public Service Previous(int id)

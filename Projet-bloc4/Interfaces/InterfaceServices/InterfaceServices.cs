@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Projet_bloc4.GestionEmployees;
 
 namespace Projet_bloc4.Interfaces.InterfaceServices
 {
@@ -19,7 +20,7 @@ namespace Projet_bloc4.Interfaces.InterfaceServices
         {
             
             InitializeComponent();
-          
+         
         }
 
 
@@ -92,22 +93,26 @@ namespace Projet_bloc4.Interfaces.InterfaceServices
                 Service service = new GestionnaireServices().SearchServiceById(id);
                 service.Name = txt_service.Text;
                 new GestionnaireServices().UpdateService(service);
+
             }
             catch
             {
-                MessageBox.Show("Le label id est vide");
+                    MessageBox.Show("Le label id est vide");
             }
-            
+ 
         }
 
         private void bt_delete_Click(object sender, EventArgs e)
         {
+
             try
             {
+              
                 int id = int.Parse(lbl_id.Text);
                 new GestionnaireServices().DeleteService(id);
-
+                 
                 bt_start_Click(this, null);
+             
             }
             catch (FormatException)
             {
