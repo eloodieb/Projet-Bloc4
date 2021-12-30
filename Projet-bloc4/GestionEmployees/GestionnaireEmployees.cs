@@ -29,8 +29,7 @@ namespace Projet_bloc4.GestionEmployees
 
                 //Ouverture de la connexion
                 con.Open();
-                SqlCommand cmd = new SqlCommand("insert into Employees values (@Id, @name, @firstname, @phoneNumber, @mobileNumber, @email, @idSite, @idService)", con);
-                cmd.Parameters.AddWithValue("@Id", employee.Id);
+                SqlCommand cmd = new SqlCommand("insert into Employees values (@name, @firstname, @phoneNumber, @mobileNumber, @email, @idSite, @idService)", con);
                 cmd.Parameters.AddWithValue("@name", employee.Name);
                 cmd.Parameters.AddWithValue("@firstname", employee.Firstname);
                 cmd.Parameters.AddWithValue("@phoneNumber", employee.MobilePhone);

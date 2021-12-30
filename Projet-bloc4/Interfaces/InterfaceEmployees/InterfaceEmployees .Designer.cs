@@ -199,7 +199,7 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.txt_service.Name = "txt_service";
             this.txt_service.Size = new System.Drawing.Size(166, 24);
             this.txt_service.TabIndex = 19;
-
+            this.txt_service.SelectedIndexChanged += new System.EventHandler(this.txt_service_SelectedIndexChanged);
             // 
             // txt_site
             // 

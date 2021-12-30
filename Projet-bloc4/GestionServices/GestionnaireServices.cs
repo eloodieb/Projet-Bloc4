@@ -3,25 +3,31 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Projet_bloc4.GestionServices
 {
+
+
     public class GestionnaireServices
     {
         //Création d'une liste de services
-        static List<Service> list_services = new List<Service>();
+        //static List<String> list_services = new List<String>();
+        
+       
         private static int ServicesNumber;
         public int AddService(Service service)
         {
-            if (service.Id != 0)
+           /*if (service.Id != 0)
                 throw new AddExistingServiceException("Impossible d'ajouter un projet déjà existant");
             else
             {
                 service.Id = ++GestionnaireServices.ServicesNumber;
                 service.CreationDate = DateTime.Now;
                 list_services.Add(service);
+            }*/
 
                 //Connexion à la base de données
                 string connexionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Elodie\source\repos\Projet-bloc4\Projet-bloc4\projet4.mdf;Integrated Security=True;Connect Timeout=30";
@@ -29,23 +35,40 @@ namespace Projet_bloc4.GestionServices
 
                 //Ouverture de la connexion
                 con.Open();
-                SqlCommand cmd = new SqlCommand("insert into Services values (@Id, @name)", con);
-                cmd.Parameters.AddWithValue("@Id", service.Id);
+                SqlCommand cmd = new SqlCommand("insert into Services values (@name)", con);
                 cmd.Parameters.AddWithValue("@name", service.Name);
 
                 //Exécute la requête sql
-                cmd.ExecuteNonQuery();
+                int res = cmd.ExecuteNonQuery();
 
                 // Fermeture Connexion
                 con.Close();
-            }
-            return service.Id;
+
+            return res;
+           //s return service.Id
+           
         }
 
         public void DeleteService(int id)
         {
             Service service = this.SearchServiceById(id);
-            list_services.Remove(service);
+  
+            //Connexion à la base de données
+            string connexionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Elodie\source\repos\Projet-bloc4\Projet-bloc4\projet4.mdf;Integrated Security=True;Connect Timeout=30";
+            SqlConnection con = new SqlConnection(connexionString);
+
+            //Ouverture de la connexion
+            con.Open();
+            SqlCommand cmd = new SqlCommand("Delete from Services INNER JOIN Employees ON (Services.Id = Employees.idService) where Services.Id = @id", con);
+
+            cmd.Parameters.AddWithValue("@id", service.Id);
+
+            //Exécute la requête sql
+            cmd.ExecuteNonQuery();
+
+            // Fermeture Connexion
+            con.Close();
+       
         }
 
         public void UpdateService(Service service)
@@ -56,28 +79,70 @@ namespace Projet_bloc4.GestionServices
             Service s = this.SearchServiceById(service.Id);
 
             service.UpdateDate = DateTime.Now;
-            list_services.Insert(list_services.IndexOf(s), service);
-            
-           
+            //list_services.Insert(list_services.IndexOf(s), service);
+
+
+            //Connexion à la base de données
+            string connexionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Elodie\source\repos\Projet-bloc4\Projet-bloc4\projet4.mdf;Integrated Security=True;Connect Timeout=30";
+            SqlConnection con = new SqlConnection(connexionString);
+
+            //Ouverture de la connexion
+            con.Open();
+            SqlCommand cmd = new SqlCommand("Update Services where Services.Id = @id", con);
+
+            cmd.Parameters.AddWithValue("@id", service.Id);
+
+            //Exécute la requête sql
+            cmd.ExecuteNonQuery();
+
+            // Fermeture Connexion
+            con.Close();
+
+          
         }
         public Service SearchServiceById(int id)
         {
-            foreach (var item in list_services)
-            {
-                if (item.Id == id)
-                    return item;
-            }
-            return null;
+             foreach (var item in GetServices())
+             {
+                 if (item.Id == id)
+                     return item;
+             }
+             return null;
+
         }
         public List<Service> GetServices()
         {
-            return list_services;
+           
+                List<Service> list_services = new List<Service>();
+
+                string connexionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Elodie\source\repos\Projet-bloc4\Projet-bloc4\projet4.mdf;Integrated Security=True;Connect Timeout=30";
+                SqlConnection con = new SqlConnection(connexionString);
+                con.Open();
+                SqlCommand cmd = new SqlCommand("Select * from Services", con);
+
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+               
+                        while (rdr.Read())
+                        {
+                            Service service = new Service();
+                            service.Id = rdr.GetInt32(0);
+                            service.Name = rdr.GetString(1);
+
+                            list_services.Add(service);
+                        }
+                    
+
+                con.Close();
+                return list_services;
+
         }
 
         public Service Start()
         {
-            if (list_services.Count > 0)
-                return list_services[0];
+            if (GetServices().Count > 0)
+                return GetServices()[0];
             else
                 return null;
         }
@@ -85,9 +150,9 @@ namespace Projet_bloc4.GestionServices
         public Service Next(int id)
         {
             Service service = this.SearchServiceById(id);
-            int index = list_services.IndexOf(service);
-            if ((list_services.Count - 1) >= (index + 1))
-                return list_services[index + 1];
+            int index = GetServices().IndexOf(service);
+            if ((GetServices().Count - 1) >= (index + 1))
+                return GetServices()[index + 1];
             else
                 return null;
 
@@ -96,17 +161,17 @@ namespace Projet_bloc4.GestionServices
         public Service Previous(int id)
         {
             Service service = this.SearchServiceById(id);
-            int index = list_services.IndexOf(service);
-            if ((list_services.Count - 1) >= (index - 1) && index > 0)
-                return list_services[index - 1];
+            int index = GetServices().IndexOf(service);
+            if ((GetServices().Count - 1) >= (index - 1) && index > 0)
+                return GetServices()[index - 1];
             else
                 return null;
         }
 
         public Service End()
         {
-            if (list_services.Count > 0)
-                return list_services[list_services.Count - 1];
+            if (GetServices().Count > 0)
+                return GetServices()[GetServices().Count - 1];
             else
                 return null;
         }

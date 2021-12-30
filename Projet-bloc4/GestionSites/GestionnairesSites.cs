@@ -30,9 +30,8 @@ namespace Projet_bloc4.GestionSites
 
                 //Ouverture de la connexion
                 con.Open();
-                SqlCommand cmd = new SqlCommand("insert into Sites values (@Id, @city)", con);
-                cmd.Parameters.AddWithValue("@Id", site.Id);
-                cmd.Parameters.AddWithValue("@name", site.Name);
+                SqlCommand cmd = new SqlCommand("insert into Sites values (@city)", con);
+                cmd.Parameters.AddWithValue("@city", site.Name);
 
                 //Exécute la requête sql
                 cmd.ExecuteNonQuery();

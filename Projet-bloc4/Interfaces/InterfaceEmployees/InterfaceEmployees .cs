@@ -176,6 +176,9 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.Display(employee);
         }
 
-    
+        private void txt_service_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
