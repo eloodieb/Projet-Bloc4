@@ -6,18 +6,19 @@ using System.Linq;
 using System.Data;
 using System.Text;
 using System.Threading.Tasks;
+using Projet_bloc4;
 
 namespace Projet_bloc4.GestionServices
 {
 
-
+  
     public class GestionnaireServices
     {
         //Création d'une liste de services
         //static List<String> list_services = new List<String>();
-        
-       
-        private static int ServicesNumber;
+
+      
+        //private static int ServicesNumber;
         public int AddService(Service service)
         {
            /*if (service.Id != 0)
@@ -40,12 +41,12 @@ namespace Projet_bloc4.GestionServices
 
                 //Exécute la requête sql
                 int res = cmd.ExecuteNonQuery();
-
-                // Fermeture Connexion
-                con.Close();
-
+              
+            // Fermeture Connexion
+            con.Close();
+            
             return res;
-           //s return service.Id
+            //s return service.Id
            
         }
 
@@ -79,7 +80,7 @@ namespace Projet_bloc4.GestionServices
             Service s = this.SearchServiceById(service.Id);
 
             service.UpdateDate = DateTime.Now;
-            //list_services.Insert(list_services.IndexOf(s), service);
+            //GetServices().Insert(GetServices().IndexOf(s), service);
 
 
             //Connexion à la base de données
@@ -88,17 +89,18 @@ namespace Projet_bloc4.GestionServices
 
             //Ouverture de la connexion
             con.Open();
-            SqlCommand cmd = new SqlCommand("Update Services where Services.Id = @id", con);
+            SqlCommand cmd = new SqlCommand("Update Services Set name = @newName where Id = @id", con);
 
+            cmd.Parameters.AddWithValue("@newName", service.Name);
             cmd.Parameters.AddWithValue("@id", service.Id);
-
+            
             //Exécute la requête sql
             cmd.ExecuteNonQuery();
 
             // Fermeture Connexion
             con.Close();
 
-          
+           
         }
         public Service SearchServiceById(int id)
         {
@@ -137,6 +139,8 @@ namespace Projet_bloc4.GestionServices
                 con.Close();
                 return list_services;
 
+           
+
         }
 
         public Service Start()
@@ -145,6 +149,8 @@ namespace Projet_bloc4.GestionServices
                 return GetServices()[0];
             else
                 return null;
+
+            
         }
 
         public Service Next(int id)
