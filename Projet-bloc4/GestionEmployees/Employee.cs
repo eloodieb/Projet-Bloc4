@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Projet_bloc4.GestionEmployees
 {
@@ -14,8 +10,8 @@ namespace Projet_bloc4.GestionEmployees
         string mobilePhone;
         string phoneNumber;
         string email;
-        string service;
-        string site;
+        int service;
+        int site;
         DateTime creationDate;
         DateTime updateDate;
 
@@ -25,8 +21,8 @@ namespace Projet_bloc4.GestionEmployees
         public string MobilePhone { get => mobilePhone; set => mobilePhone = value; }
         public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
         public string Email { get => email; set => email = value; }
-        public string Service { get => service; set => service = value; }
-        public string Site { get => site; set => site = value; }
+        public int Service { get => service; set => service = value; }
+        public int Site { get => site; set => site = value; }
         public DateTime CreationDate { get => creationDate; set => creationDate = value; }
         public DateTime UpdateDate { get => updateDate; set => updateDate = value; }
     }

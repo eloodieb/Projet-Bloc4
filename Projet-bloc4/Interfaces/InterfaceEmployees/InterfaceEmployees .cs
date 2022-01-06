@@ -1,26 +1,28 @@
 ﻿using Projet_bloc4.GestionEmployees;
+using Projet_bloc4.GestionServices;
+using Projet_bloc4.GestionSites;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows.Forms;
 
 namespace Projet_bloc4.Interfaces.InterfaceEmployees
 {
+
     public partial class InterfaceEmployees : Form
     {
+
         public InterfaceEmployees()
         {
             InitializeComponent();
+
         }
 
         private void bt_add_Click(object sender, EventArgs e)
         {
+
             lbl_id.Text = "";
             txt_name.Text = "";
             txt_firstname.Text = "";
@@ -28,62 +30,46 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             txt_phoneNumber.Text = "";
             txt_email.Text = "";
             txt_service.Text = "";
-            txt_site.Text= "";
+            txt_site.Text = "";
             lbl_creation_date.Text = DateTime.Now.ToShortDateString();
             lbl_update_date.Text = "";
 
-
-            //Chargement de la liste des différents sites
             //Connexion à la base de données
-            string connexionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Elodie\source\repos\Projet-bloc4\Projet-bloc4\projet4.mdf;Integrated Security=True;Connect Timeout=30";
-            SqlConnection con = new SqlConnection(connexionString);
+            GestionnairesSites site = new GestionnairesSites();
 
-            //Ouverture de la connexion
-            con.Open();
-            SqlCommand cmd = new SqlCommand("select * from Sites", con);
-
-
-            //Exécute la requête sql
-            SqlDataReader dr;
-            dr = cmd.ExecuteReader();
-            while (dr.Read())
+            foreach (Site p in site.GetSites())
             {
-                txt_site.Items.Add(dr["city"]);
+
+                txt_site.Items.Add(p.Id + " " +p.Name);
+             
             }
 
-            // Fermeture Connexion
-            con.Close();
-
-            //Chargement de la liste des différents Services
-            //Ouverture de la connexion
-            con.Open();
-            SqlCommand cmdServices = new SqlCommand("select * from Services", con);
 
 
-            //Exécute la requête sql
-            SqlDataReader res;
-            res = cmdServices.ExecuteReader();
-            while (res.Read())
+            GestionnaireServices service = new GestionnaireServices();
+
+            foreach (Service s in service.GetServices())
             {
-                txt_service.Items.Add(res["name"]);
+                txt_service.Items.Add(s.Id);
+              
             }
 
-            // Fermeture Connexion
-            con.Close();
+
         }
 
         private void bt_register_Click(object sender, EventArgs e)
         {
-      
-          
+
+
             Employee employee = new Employee();
             employee.Name = txt_name.Text;
             employee.Firstname = txt_firstname.Text;
             employee.MobilePhone = txt_mobileNumber.Text;
             employee.PhoneNumber = txt_phoneNumber.Text;
             employee.Email = txt_email.Text;
-            employee.Service = txt_service.GetItemText(txt_service.SelectedIndex);
-            employee.Site = txt_site.GetItemText(txt_site.SelectedIndex);
+            employee.Service = Convert.ToInt32(txt_service.SelectedItem);
+            employee.Site = Convert.ToInt32(txt_site.SelectedItem);
+
             new GestionnaireEmployees().AddEmployee(employee);
             MessageBox.Show("Salarié ajouté");
 
@@ -101,8 +87,8 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
                 employee.MobilePhone = txt_mobileNumber.Text;
                 employee.PhoneNumber = txt_phoneNumber.Text;
                 employee.Email = txt_email.Text;
-                employee.Service = txt_service.Text;
-                employee.Site = txt_site.Text;
+                //employee.Service = txt_service.Text;
+                //employee.Site = txt_site.Text;
                 new GestionnaireEmployees().UpdateEmployee(employee);
             }
             catch (FormatException)
@@ -133,7 +119,7 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
 
         private void Display(Employee employee)
         {
-            if(employee != null)
+            if (employee != null)
             {
                 lbl_id.Text = employee.Id.ToString();
                 txt_name.Text = employee.Name;
@@ -141,19 +127,21 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
                 txt_mobileNumber.Text = employee.MobilePhone;
                 txt_phoneNumber.Text = employee.PhoneNumber;
                 txt_email.Text = employee.Email;
-                txt_service.Text = employee.Service;
-                txt_site.Text = employee.Site;
+  
+                        
+                txt_site.Text = employee.Site.ToString();
+            
                 lbl_creation_date.Text = employee.CreationDate.ToString();
-
-                if(employee.UpdateDate.Year != 1)
-                lbl_update_date.Text = employee.UpdateDate.ToShortDateString();
+           
+                if (employee.UpdateDate.Year != 1)
+                    lbl_update_date.Text = employee.UpdateDate.ToShortDateString();
             }
 
         }
 
         private void bt_previous_Click(object sender, EventArgs e)
         {
-            if ( lbl_id.Text != "" && lbl_id.Text != "-")
+            if (lbl_id.Text != "" && lbl_id.Text != "-")
             {
                 Employee employee = new GestionnaireEmployees().Previous(int.Parse(lbl_id.Text));
                 this.Display(employee);
@@ -176,8 +164,16 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.Display(employee);
         }
 
-        private void txt_service_SelectedIndexChanged(object sender, EventArgs e)
+        private void fillByToolStripButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                this.sitesTableAdapter.FillBy(this.projet4DataSet.Sites);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
 
         }
     }

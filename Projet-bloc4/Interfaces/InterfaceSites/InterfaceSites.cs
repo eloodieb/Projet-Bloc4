@@ -1,12 +1,5 @@
 ﻿using Projet_bloc4.GestionSites;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Projet_bloc4.Interfaces.InterfaceSites
@@ -68,12 +61,12 @@ namespace Projet_bloc4.Interfaces.InterfaceSites
                 MessageBox.Show("Veuillez choisir un site à modifier");
             }
 
-            
+
         }
 
         private void bt_previous_Click(object sender, EventArgs e)
         {
-            if (lbl_id.Text !="" && lbl_id.Text != "-")
+            if (lbl_id.Text != "" && lbl_id.Text != "-")
             {
                 Site site = new GestionnairesSites().Previous(int.Parse(lbl_id.Text));
                 this.Display(site);
@@ -97,16 +90,16 @@ namespace Projet_bloc4.Interfaces.InterfaceSites
 
         private void Display(Site site)
         {
-            if(site != null)
+            if (site != null)
             {
                 lbl_id.Text = site.Id.ToString();
                 txt_ville.Text = site.Name;
                 lbl_date_creation.Text = site.CreationDate.ToString();
 
                 if (site.UpdateDate.Year != 1)
-                lbl_date_modification.Text = site.UpdateDate.ToShortDateString();
+                    lbl_date_modification.Text = site.UpdateDate.ToShortDateString();
             }
-  
+
         }
 
         private void bt_delete_Click(object sender, EventArgs e)

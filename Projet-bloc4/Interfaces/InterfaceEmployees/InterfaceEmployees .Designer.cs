@@ -29,6 +29,7 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lbl_id = new System.Windows.Forms.Label();
             this.bt_end = new System.Windows.Forms.Button();
@@ -40,8 +41,10 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.bt_register = new System.Windows.Forms.Button();
             this.bt_add = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txt_service = new System.Windows.Forms.ListBox();
             this.txt_site = new System.Windows.Forms.ListBox();
+            this.sitesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.projet4DataSet = new Projet_bloc4.projet4DataSet();
+            this.txt_service = new System.Windows.Forms.ListBox();
             this.lbl_email = new System.Windows.Forms.Label();
             this.txt_email = new System.Windows.Forms.TextBox();
             this.lbl_site = new System.Windows.Forms.Label();
@@ -58,8 +61,16 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.txt_name = new System.Windows.Forms.TextBox();
             this.lbl_creation_date = new System.Windows.Forms.Label();
             this.lbl_update_date = new System.Windows.Forms.Label();
+            this.sitesTableAdapter = new Projet_bloc4.projet4DataSetTableAdapters.SitesTableAdapter();
+            this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
+            this.fillByToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.siteBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sitesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.projet4DataSet)).BeginInit();
+            this.fillByToolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.siteBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -69,7 +80,7 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.groupBox2.Controls.Add(this.bt_start);
             this.groupBox2.Controls.Add(this.bt_previous);
             this.groupBox2.Controls.Add(this.bt_next);
-            this.groupBox2.Location = new System.Drawing.Point(25, 468);
+            this.groupBox2.Location = new System.Drawing.Point(25, 541);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(548, 91);
             this.groupBox2.TabIndex = 17;
@@ -166,8 +177,8 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txt_service);
             this.groupBox1.Controls.Add(this.txt_site);
+            this.groupBox1.Controls.Add(this.txt_service);
             this.groupBox1.Controls.Add(this.lbl_email);
             this.groupBox1.Controls.Add(this.txt_email);
             this.groupBox1.Controls.Add(this.lbl_site);
@@ -186,10 +197,30 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.groupBox1.Controls.Add(this.lbl_update_date);
             this.groupBox1.Location = new System.Drawing.Point(25, 14);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(548, 457);
+            this.groupBox1.Size = new System.Drawing.Size(562, 521);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Salariés";
+            // 
+            // txt_site
+            // 
+            this.txt_site.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.sitesBindingSource, "city", true));
+            this.txt_site.FormattingEnabled = true;
+            this.txt_site.ItemHeight = 20;
+            this.txt_site.Location = new System.Drawing.Point(222, 289);
+            this.txt_site.Name = "txt_site";
+            this.txt_site.Size = new System.Drawing.Size(320, 104);
+            this.txt_site.TabIndex = 20;
+            // 
+            // sitesBindingSource
+            // 
+            this.sitesBindingSource.DataMember = "Sites";
+            this.sitesBindingSource.DataSource = this.projet4DataSet;
+            // 
+            // projet4DataSet
+            // 
+            this.projet4DataSet.DataSetName = "projet4DataSet";
+            this.projet4DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // txt_service
             // 
@@ -199,16 +230,6 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.txt_service.Name = "txt_service";
             this.txt_service.Size = new System.Drawing.Size(166, 24);
             this.txt_service.TabIndex = 19;
-            this.txt_service.SelectedIndexChanged += new System.EventHandler(this.txt_service_SelectedIndexChanged);
-            // 
-            // txt_site
-            // 
-            this.txt_site.FormattingEnabled = true;
-            this.txt_site.ItemHeight = 20;
-            this.txt_site.Location = new System.Drawing.Point(222, 289);
-            this.txt_site.Name = "txt_site";
-            this.txt_site.Size = new System.Drawing.Size(166, 24);
-            this.txt_site.TabIndex = 18;
             // 
             // lbl_email
             // 
@@ -231,9 +252,9 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.lbl_site.AutoSize = true;
             this.lbl_site.Location = new System.Drawing.Point(32, 289);
             this.lbl_site.Name = "lbl_site";
-            this.lbl_site.Size = new System.Drawing.Size(37, 20);
+            this.lbl_site.Size = new System.Drawing.Size(68, 30);
             this.lbl_site.TabIndex = 14;
-            this.lbl_site.Text = "Site";
+            this.lbl_site.Text = "Sites";
             // 
             // lbl_service
             // 
@@ -304,7 +325,7 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             // lbl_creationDate
             // 
             this.lbl_creationDate.AutoSize = true;
-            this.lbl_creationDate.Location = new System.Drawing.Point(32, 361);
+            this.lbl_creationDate.Location = new System.Drawing.Point(32, 405);
             this.lbl_creationDate.Name = "lbl_creationDate";
             this.lbl_creationDate.Size = new System.Drawing.Size(127, 20);
             this.lbl_creationDate.TabIndex = 1;
@@ -313,7 +334,7 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             // lbl_updateDate
             // 
             this.lbl_updateDate.AutoSize = true;
-            this.lbl_updateDate.Location = new System.Drawing.Point(32, 415);
+            this.lbl_updateDate.Location = new System.Drawing.Point(32, 459);
             this.lbl_updateDate.Name = "lbl_updateDate";
             this.lbl_updateDate.Size = new System.Drawing.Size(155, 20);
             this.lbl_updateDate.TabIndex = 2;
@@ -329,7 +350,7 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             // lbl_creation_date
             // 
             this.lbl_creation_date.AutoSize = true;
-            this.lbl_creation_date.Location = new System.Drawing.Point(222, 361);
+            this.lbl_creation_date.Location = new System.Drawing.Point(222, 405);
             this.lbl_creation_date.Name = "lbl_creation_date";
             this.lbl_creation_date.Size = new System.Drawing.Size(14, 20);
             this.lbl_creation_date.TabIndex = 4;
@@ -338,17 +359,45 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             // lbl_update_date
             // 
             this.lbl_update_date.AutoSize = true;
-            this.lbl_update_date.Location = new System.Drawing.Point(222, 415);
+            this.lbl_update_date.Location = new System.Drawing.Point(222, 459);
             this.lbl_update_date.Name = "lbl_update_date";
             this.lbl_update_date.Size = new System.Drawing.Size(14, 20);
             this.lbl_update_date.TabIndex = 5;
             this.lbl_update_date.Text = "-";
             // 
+            // sitesTableAdapter
+            // 
+            this.sitesTableAdapter.ClearBeforeFill = true;
+            // 
+            // fillByToolStrip
+            // 
+            this.fillByToolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.fillByToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fillByToolStripButton});
+            this.fillByToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.fillByToolStrip.Name = "fillByToolStrip";
+            this.fillByToolStrip.Size = new System.Drawing.Size(1863, 57);
+            this.fillByToolStrip.TabIndex = 23;
+            this.fillByToolStrip.Text = "fillByToolStrip";
+            // 
+            // fillByToolStripButton
+            // 
+            this.fillByToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.fillByToolStripButton.Name = "fillByToolStripButton";
+            this.fillByToolStripButton.Size = new System.Drawing.Size(56, 52);
+            this.fillByToolStripButton.Text = "FillBy";
+            this.fillByToolStripButton.Click += new System.EventHandler(this.fillByToolStripButton_Click);
+            // 
+            // siteBindingSource
+            // 
+            this.siteBindingSource.DataSource = typeof(Projet_bloc4.GestionSites.Site);
+            // 
             // InterfaceEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(813, 605);
+            this.ClientSize = new System.Drawing.Size(1242, 678);
+            this.Controls.Add(this.fillByToolStrip);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_delete);
             this.Controls.Add(this.bt_update);
@@ -361,7 +410,13 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sitesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.projet4DataSet)).EndInit();
+            this.fillByToolStrip.ResumeLayout(false);
+            this.fillByToolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.siteBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -395,5 +450,11 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
         private System.Windows.Forms.Label lbl_id;
         private System.Windows.Forms.ListBox txt_service;
         private System.Windows.Forms.ListBox txt_site;
+        private System.Windows.Forms.BindingSource siteBindingSource;
+        private projet4DataSet projet4DataSet;
+        private System.Windows.Forms.BindingSource sitesBindingSource;
+        private projet4DataSetTableAdapters.SitesTableAdapter sitesTableAdapter;
+        private System.Windows.Forms.ToolStrip fillByToolStrip;
+        private System.Windows.Forms.ToolStripButton fillByToolStripButton;
     }
 }

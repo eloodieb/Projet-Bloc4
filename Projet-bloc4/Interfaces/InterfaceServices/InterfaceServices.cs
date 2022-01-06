@@ -1,26 +1,18 @@
 ﻿using Projet_bloc4.GestionServices;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Projet_bloc4.GestionEmployees;
 
 namespace Projet_bloc4.Interfaces.InterfaceServices
 {
     public partial class InterfaceServices : Form
     {
-     
-       
+
+
         public InterfaceServices()
         {
-            
+
             InitializeComponent();
-         
+
         }
 
 
@@ -30,6 +22,8 @@ namespace Projet_bloc4.Interfaces.InterfaceServices
             txt_service.Text = "";
             lbl_creation_date.Text = "";
             lbl_update_date.Text = DateTime.Now.ToShortDateString();
+
+
         }
 
         private void bt_register_Click(object sender, EventArgs e)
@@ -88,7 +82,7 @@ namespace Projet_bloc4.Interfaces.InterfaceServices
         {
             try
             {
-                
+
                 int id = int.Parse(lbl_id.Text);
                 Service service = new GestionnaireServices().SearchServiceById(id);
                 service.Name = txt_service.Text;
@@ -97,9 +91,9 @@ namespace Projet_bloc4.Interfaces.InterfaceServices
             }
             catch
             {
-                    MessageBox.Show("Le label id est vide");
+                MessageBox.Show("Le label id est vide");
             }
- 
+
         }
 
         private void bt_delete_Click(object sender, EventArgs e)
@@ -107,12 +101,12 @@ namespace Projet_bloc4.Interfaces.InterfaceServices
 
             try
             {
-              
+
                 int id = int.Parse(lbl_id.Text);
                 new GestionnaireServices().DeleteService(id);
-                 
+
                 bt_start_Click(this, null);
-             
+
             }
             catch (FormatException)
             {
