@@ -70,6 +70,12 @@
     <Compile Include="Interfaces\InterfaceEmployees\InterfaceEmployees .Designer.cs">
       <DependentUpon>InterfaceEmployees .cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\InterfaceLogin\login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaces\InterfaceLogin\login.Designer.cs">
+      <DependentUpon>login.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\InterfaceServices\InterfaceServices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaces\InterfaceEmployees\InterfaceEmployees .resx">
       <DependentUpon>InterfaceEmployees .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaces\InterfaceLogin\login.resx">
+      <DependentUpon>login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaces\InterfaceServices\InterfaceServices.resx">
       <DependentUpon>InterfaceServices.cs</DependentUpon>

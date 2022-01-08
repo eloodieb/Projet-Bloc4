@@ -13,6 +13,9 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
 
     public partial class InterfaceEmployees : Form
     {
+        //Connexion à la base de données
+        static string connexionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Elodie\source\repos\Projet-bloc4\Projet-bloc4\projet4.mdf;Integrated Security=True;Connect Timeout=30";
+        SqlConnection con = new SqlConnection(connexionString);
 
         public InterfaceEmployees()
         {
@@ -29,29 +32,34 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             txt_mobileNumber.Text = "";
             txt_phoneNumber.Text = "";
             txt_email.Text = "";
-            txt_service.Text = "";
-            txt_site.Text = "";
             lbl_creation_date.Text = DateTime.Now.ToShortDateString();
             lbl_update_date.Text = "";
 
-            //Connexion à la base de données
-            GestionnairesSites site = new GestionnairesSites();
+     
 
-            foreach (Site p in site.GetSites())
+            GestionnaireServices service = new GestionnaireServices();
+   
+
+            foreach (Service item in service.GetServices())
             {
+                var row = new string[] {item.Name };
+                var lvi = new ListViewItem(row);
+                lvi.Tag = item;
+                listViewServices.Items.Add(lvi);
 
-                txt_site.Items.Add(p.Id + " " +p.Name);
-             
             }
 
 
+            GestionnairesSites site = new GestionnairesSites();
+         
 
-            GestionnaireServices service = new GestionnaireServices();
-
-            foreach (Service s in service.GetServices())
+            foreach (Site item in site.GetSites())
             {
-                txt_service.Items.Add(s.Id);
-              
+                var row = new string[] { item.Name };
+                var lvi = new ListViewItem(row);
+                lvi.Tag = item;
+                listViewSites.Items.Add(lvi);
+
             }
 
 
@@ -60,15 +68,18 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
         private void bt_register_Click(object sender, EventArgs e)
         {
 
-
+            var selectedItem = (Service)listViewServices.SelectedItems[0].Tag;
+            var selectedItemSite = (Site)listViewSites.SelectedItems[0].Tag;
             Employee employee = new Employee();
             employee.Name = txt_name.Text;
             employee.Firstname = txt_firstname.Text;
             employee.MobilePhone = txt_mobileNumber.Text;
             employee.PhoneNumber = txt_phoneNumber.Text;
             employee.Email = txt_email.Text;
-            employee.Service = Convert.ToInt32(txt_service.SelectedItem);
-            employee.Site = Convert.ToInt32(txt_site.SelectedItem);
+            employee.Service = selectedItem.Id;
+            employee.Site = selectedItemSite.Id;
+            Console.WriteLine(selectedItem);
+            Console.WriteLine(selectedItemSite);
 
             new GestionnaireEmployees().AddEmployee(employee);
             MessageBox.Show("Salarié ajouté");
@@ -129,7 +140,7 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
                 txt_email.Text = employee.Email;
   
                         
-                txt_site.Text = employee.Site.ToString();
+                //txt_site.Text = employee.Site.ToString();
             
                 lbl_creation_date.Text = employee.CreationDate.ToString();
            
@@ -176,5 +187,28 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             }
 
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void InterfaceEmployees_Load(object sender, EventArgs e)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT Id, name, firstname, phoneNumber, mobileNumber, email, idService, idSite FROM Employees", con);
+            con.Open();
+
+            //Permet d'afficher la liste des clients dans la dataGrid
+            SqlDataAdapter sdr = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sdr.Fill(dt);
+            dataGridViewEmployeesAdmin.DataSource = dt;
+
+            con.Close();
+
+   
+        }
+
+ 
     }
 }
