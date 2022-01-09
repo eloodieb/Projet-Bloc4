@@ -59,9 +59,10 @@ namespace Projet_bloc4
             this.salariésToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1884, 54);
+            this.menuStrip1.Size = new System.Drawing.Size(1256, 33);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.Visible = false;
             // 
             // sitesToolStripMenuItem
             // 
@@ -74,7 +75,7 @@ namespace Projet_bloc4
             // gérerLesSitesToolStripMenuItem
             // 
             this.gérerLesSitesToolStripMenuItem.Name = "gérerLesSitesToolStripMenuItem";
-            this.gérerLesSitesToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.gérerLesSitesToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
             this.gérerLesSitesToolStripMenuItem.Text = "Gérer  les sites";
             this.gérerLesSitesToolStripMenuItem.Click += new System.EventHandler(this.gérerLesSitesToolStripMenuItem_Click);
             // 
@@ -89,7 +90,7 @@ namespace Projet_bloc4
             // gérerLesServicesToolStripMenuItem
             // 
             this.gérerLesServicesToolStripMenuItem.Name = "gérerLesServicesToolStripMenuItem";
-            this.gérerLesServicesToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.gérerLesServicesToolStripMenuItem.Size = new System.Drawing.Size(248, 34);
             this.gérerLesServicesToolStripMenuItem.Text = "Gérer les services";
             this.gérerLesServicesToolStripMenuItem.Click += new System.EventHandler(this.gérerLesServicesToolStripMenuItem_Click);
             // 
@@ -104,7 +105,7 @@ namespace Projet_bloc4
             // gérerLesSalariésToolStripMenuItem
             // 
             this.gérerLesSalariésToolStripMenuItem.Name = "gérerLesSalariésToolStripMenuItem";
-            this.gérerLesSalariésToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.gérerLesSalariésToolStripMenuItem.Size = new System.Drawing.Size(244, 34);
             this.gérerLesSalariésToolStripMenuItem.Text = "Gérer les salariés";
             this.gérerLesSalariésToolStripMenuItem.Click += new System.EventHandler(this.gérerLesSalariésToolStripMenuItem_Click);
             // 
@@ -113,7 +114,7 @@ namespace Projet_bloc4
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 81);
+            this.panel1.Location = new System.Drawing.Point(0, 33);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1256, 106);
             this.panel1.TabIndex = 0;
@@ -125,6 +126,7 @@ namespace Projet_bloc4
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(465, 38);
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(320, 32);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "Gestionnaire de salariés";
@@ -164,7 +166,7 @@ namespace Projet_bloc4
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(374, 184);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 30);
+            this.label2.Size = new System.Drawing.Size(49, 20);
             this.label2.TabIndex = 5;
             this.label2.Text = "Filtrer";
             // 
@@ -193,18 +195,19 @@ namespace Projet_bloc4
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1256, 843);
+            this.Controls.Add(this.dataGridViewEmployees);
             this.Controls.Add(this.listViewServices);
             this.Controls.Add(this.listViewSites);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_search);
-            this.Controls.Add(this.dataGridViewEmployees);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "home";
             this.Text = "home";
             this.Load += new System.EventHandler(this.home_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.home_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -217,7 +220,7 @@ namespace Projet_bloc4
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        public System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem sitesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gérerLesSitesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem servicesToolStripMenuItem;

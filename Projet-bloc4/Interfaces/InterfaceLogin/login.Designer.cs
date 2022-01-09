@@ -32,8 +32,8 @@ namespace Projet_bloc4.Interfaces.InterfaceLogin
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txt_password = new System.Windows.Forms.TextBox();
-            this.btn_connexion = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,31 +67,31 @@ namespace Projet_bloc4.Interfaces.InterfaceLogin
             this.label2.TabIndex = 1;
             this.label2.Text = "Mot de passe";
             // 
-            // txt_password
+            // textBox1
             // 
-            this.txt_password.Location = new System.Drawing.Point(398, 152);
-            this.txt_password.Name = "txt_password";
-            this.txt_password.PasswordChar = '*';
-            this.txt_password.Size = new System.Drawing.Size(155, 26);
-            this.txt_password.TabIndex = 2;
+            this.textBox1.Location = new System.Drawing.Point(399, 156);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(149, 26);
+            this.textBox1.TabIndex = 2;
+           
             // 
-            // btn_connexion
+            // button1
             // 
-            this.btn_connexion.Location = new System.Drawing.Point(398, 217);
-            this.btn_connexion.Name = "btn_connexion";
-            this.btn_connexion.Size = new System.Drawing.Size(155, 33);
-            this.btn_connexion.TabIndex = 3;
-            this.btn_connexion.Text = "Se connecter";
-            this.btn_connexion.UseVisualStyleBackColor = true;
-            this.btn_connexion.Click += new System.EventHandler(this.btn_connexion_Click);
+            this.button1.Location = new System.Drawing.Point(399, 215);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(155, 38);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btn_connexion);
-            this.Controls.Add(this.txt_password);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Name = "login";
@@ -108,7 +108,7 @@ namespace Projet_bloc4.Interfaces.InterfaceLogin
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txt_password;
-        private System.Windows.Forms.Button btn_connexion;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
     }
 }

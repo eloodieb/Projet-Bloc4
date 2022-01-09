@@ -1,12 +1,14 @@
 ﻿using Projet_bloc4.GestionServices;
 using Projet_bloc4.GestionSites;
 using Projet_bloc4.Interfaces.InterfaceEmployees;
+using Projet_bloc4.Interfaces.InterfaceLogin;
 using Projet_bloc4.Interfaces.InterfaceServices;
 using Projet_bloc4.Interfaces.InterfaceSites;
 using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Projet_bloc4
 {
@@ -19,6 +21,7 @@ namespace Projet_bloc4
         public home()
         {
             InitializeComponent();
+            KeyPreview = true;
         }
 
         private void gérerLesSitesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -134,6 +137,21 @@ namespace Projet_bloc4
             {
 
             }
+        }
+
+        private void home_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.Control && e.Alt && e.KeyCode == Keys.K)
+            {
+
+                login loginForm = new login();
+                this.Hide();
+                loginForm.Show();
+               
+          
+            }
+           
         }
     }
 }
