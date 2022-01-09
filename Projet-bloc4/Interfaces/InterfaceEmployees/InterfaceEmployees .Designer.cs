@@ -37,10 +37,6 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.bt_start = new System.Windows.Forms.Button();
             this.bt_previous = new System.Windows.Forms.Button();
             this.bt_next = new System.Windows.Forms.Button();
-            this.bt_delete = new System.Windows.Forms.Button();
-            this.bt_update = new System.Windows.Forms.Button();
-            this.bt_register = new System.Windows.Forms.Button();
-            this.bt_add = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbl_email = new System.Windows.Forms.Label();
             this.txt_email = new System.Windows.Forms.TextBox();
@@ -67,11 +63,15 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.fillByToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.dataGridViewEmployeesAdmin = new System.Windows.Forms.DataGridView();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.siteBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.bt_delete = new System.Windows.Forms.Button();
+            this.bt_register = new System.Windows.Forms.Button();
+            this.bt_add = new System.Windows.Forms.Button();
+            this.bt_update = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sitesBindingSource)).BeginInit();
@@ -79,8 +79,8 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.fillByToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeesAdmin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.siteBindingSource)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -144,50 +144,6 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.bt_next.Text = "Suivant";
             this.bt_next.UseVisualStyleBackColor = true;
             this.bt_next.Click += new System.EventHandler(this.bt_next_Click);
-            // 
-            // bt_delete
-            // 
-            this.bt_delete.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.bt_delete.Location = new System.Drawing.Point(94, 411);
-            this.bt_delete.Name = "bt_delete";
-            this.bt_delete.Size = new System.Drawing.Size(148, 46);
-            this.bt_delete.TabIndex = 21;
-            this.bt_delete.Text = "Supprimer";
-            this.bt_delete.UseVisualStyleBackColor = false;
-            this.bt_delete.Click += new System.EventHandler(this.bt_delete_Click);
-            // 
-            // bt_update
-            // 
-            this.bt_update.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.bt_update.Location = new System.Drawing.Point(96, 347);
-            this.bt_update.Name = "bt_update";
-            this.bt_update.Size = new System.Drawing.Size(146, 46);
-            this.bt_update.TabIndex = 20;
-            this.bt_update.Text = "Modifier";
-            this.bt_update.UseVisualStyleBackColor = false;
-            this.bt_update.Click += new System.EventHandler(this.bt_update_Click);
-            // 
-            // bt_register
-            // 
-            this.bt_register.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.bt_register.Location = new System.Drawing.Point(96, 279);
-            this.bt_register.Name = "bt_register";
-            this.bt_register.Size = new System.Drawing.Size(146, 48);
-            this.bt_register.TabIndex = 19;
-            this.bt_register.Text = "Enregistrer";
-            this.bt_register.UseVisualStyleBackColor = false;
-            this.bt_register.Click += new System.EventHandler(this.bt_register_Click);
-            // 
-            // bt_add
-            // 
-            this.bt_add.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.bt_add.Location = new System.Drawing.Point(94, 217);
-            this.bt_add.Name = "bt_add";
-            this.bt_add.Size = new System.Drawing.Size(148, 47);
-            this.bt_add.TabIndex = 18;
-            this.bt_add.Text = "Ajouter";
-            this.bt_add.UseVisualStyleBackColor = false;
-            this.bt_add.Click += new System.EventHandler(this.bt_add_Click);
             // 
             // groupBox1
             // 
@@ -395,7 +351,7 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.fillByToolStripButton});
             this.fillByToolStrip.Location = new System.Drawing.Point(0, 0);
             this.fillByToolStrip.Name = "fillByToolStrip";
-            this.fillByToolStrip.Size = new System.Drawing.Size(2041, 34);
+            this.fillByToolStrip.Size = new System.Drawing.Size(2706, 34);
             this.fillByToolStrip.TabIndex = 23;
             this.fillByToolStrip.Text = "fillByToolStrip";
             // 
@@ -438,6 +394,84 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
+            // siteBindingSource
+            // 
+            this.siteBindingSource.DataSource = typeof(Projet_bloc4.GestionSites.Site);
+            // 
+            // bt_delete
+            // 
+            this.bt_delete.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.bt_delete.Location = new System.Drawing.Point(94, 411);
+            this.bt_delete.Name = "bt_delete";
+            this.bt_delete.Size = new System.Drawing.Size(148, 46);
+            this.bt_delete.TabIndex = 21;
+            this.bt_delete.Text = "Supprimer";
+            this.bt_delete.UseVisualStyleBackColor = false;
+            this.bt_delete.Click += new System.EventHandler(this.bt_delete_Click);
+            // 
+            // bt_register
+            // 
+            this.bt_register.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.bt_register.Location = new System.Drawing.Point(96, 279);
+            this.bt_register.Name = "bt_register";
+            this.bt_register.Size = new System.Drawing.Size(146, 48);
+            this.bt_register.TabIndex = 19;
+            this.bt_register.Text = "Enregistrer";
+            this.bt_register.UseVisualStyleBackColor = false;
+            this.bt_register.Click += new System.EventHandler(this.bt_register_Click);
+            // 
+            // bt_add
+            // 
+            this.bt_add.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.bt_add.Location = new System.Drawing.Point(94, 217);
+            this.bt_add.Name = "bt_add";
+            this.bt_add.Size = new System.Drawing.Size(148, 47);
+            this.bt_add.TabIndex = 18;
+            this.bt_add.Text = "Ajouter";
+            this.bt_add.UseVisualStyleBackColor = false;
+            this.bt_add.Click += new System.EventHandler(this.bt_add_Click);
+            // 
+            // bt_update
+            // 
+            this.bt_update.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.bt_update.Location = new System.Drawing.Point(96, 347);
+            this.bt_update.Name = "bt_update";
+            this.bt_update.Size = new System.Drawing.Size(146, 46);
+            this.bt_update.TabIndex = 20;
+            this.bt_update.Text = "Modifier";
+            this.bt_update.UseVisualStyleBackColor = false;
+            this.bt_update.Click += new System.EventHandler(this.bt_update_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button1.Location = new System.Drawing.Point(94, 555);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(148, 46);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "Se déconnecter";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Constantia", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(36, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(322, 35);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Espace Administrateur ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(67, 108);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(238, 29);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Gestion des salariés";
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -451,48 +485,14 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 34);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(390, 929);
+            this.panel1.Size = new System.Drawing.Size(363, 929);
             this.panel1.TabIndex = 26;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(67, 108);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(238, 29);
-            this.label2.TabIndex = 28;
-            this.label2.Text = "Gestion des salariés";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Constantia", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(36, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(322, 35);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "Espace Administrateur ";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.Location = new System.Drawing.Point(94, 555);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(148, 46);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "Se déconnecter";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // siteBindingSource
-            // 
-            this.siteBindingSource.DataSource = typeof(Projet_bloc4.GestionSites.Site);
             // 
             // InterfaceEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2041, 963);
+            this.ClientSize = new System.Drawing.Size(2706, 963);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridViewEmployeesAdmin);
             this.Controls.Add(this.fillByToolStrip);
@@ -511,9 +511,9 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
             this.fillByToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeesAdmin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.siteBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.siteBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -525,10 +525,6 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
         private System.Windows.Forms.Button bt_start;
         private System.Windows.Forms.Button bt_previous;
         private System.Windows.Forms.Button bt_next;
-        private System.Windows.Forms.Button bt_delete;
-        private System.Windows.Forms.Button bt_update;
-        private System.Windows.Forms.Button bt_register;
-        private System.Windows.Forms.Button bt_add;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lbl_email;
         private System.Windows.Forms.TextBox txt_email;
@@ -558,8 +554,12 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
         private System.Windows.Forms.DataGridView dataGridViewEmployeesAdmin;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button bt_update;
+        private System.Windows.Forms.Button bt_add;
+        private System.Windows.Forms.Button bt_register;
+        private System.Windows.Forms.Button bt_delete;
     }
 }

@@ -64,6 +64,12 @@
     <Compile Include="home.Designer.cs">
       <DependentUpon>home.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\InterfaceEmployeeDetails\InterfaceEmployeeDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaces\InterfaceEmployeeDetails\InterfaceEmployeeDetails.Designer.cs">
+      <DependentUpon>InterfaceEmployeeDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\InterfaceEmployees\InterfaceEmployees .cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="home.resx">
       <DependentUpon>home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaces\InterfaceEmployeeDetails\InterfaceEmployeeDetails.resx">
+      <DependentUpon>InterfaceEmployeeDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaces\InterfaceEmployees\InterfaceEmployees .resx">
       <DependentUpon>InterfaceEmployees .cs</DependentUpon>

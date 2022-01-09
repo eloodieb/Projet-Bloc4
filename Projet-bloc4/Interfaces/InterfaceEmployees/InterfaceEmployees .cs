@@ -195,11 +195,12 @@ namespace Projet_bloc4.Interfaces.InterfaceEmployees
 
         private void InterfaceEmployees_Load(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("SELECT Id, name, firstname, phoneNumber, mobileNumber, email, idService, idSite FROM Employees", con);
+            SqlCommand cmd = new SqlCommand("SELECT Employees.Id, Employees.name, firstname, phoneNumber, mobileNumber, email, Services.Name, Sites.City FROM Employees LEFT OUTER JOIN  Sites on (Employees.idSite = Sites.Id) LEFT OUTER JOIN  Services on (Employees.idService = Services.Id)", con);
             con.Open();
+   
 
-            //Permet d'afficher la liste des clients dans la dataGrid
-            SqlDataAdapter sdr = new SqlDataAdapter(cmd);
+         //Permet d'afficher la liste des clients dans la dataGrid
+         SqlDataAdapter sdr = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sdr.Fill(dt);
             dataGridViewEmployeesAdmin.DataSource = dt;
