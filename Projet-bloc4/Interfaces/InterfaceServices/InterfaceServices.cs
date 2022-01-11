@@ -1,12 +1,16 @@
 ﻿using Projet_bloc4.GestionServices;
 using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Projet_bloc4.Interfaces.InterfaceServices
 {
     public partial class InterfaceServices : Form
     {
-
+        //Connexion à la base de données
+        static string connexionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Elodie\source\repos\Projet-bloc4\Projet-bloc4\projet4.mdf;Integrated Security=True;Connect Timeout=30";
+        SqlConnection con = new SqlConnection(connexionString);
 
         public InterfaceServices()
         {
@@ -20,9 +24,6 @@ namespace Projet_bloc4.Interfaces.InterfaceServices
         {
             lbl_id.Text = "";
             txt_service.Text = "";
-            lbl_creation_date.Text = "";
-            lbl_update_date.Text = DateTime.Now.ToShortDateString();
-
 
         }
 
@@ -33,50 +34,6 @@ namespace Projet_bloc4.Interfaces.InterfaceServices
             new GestionnaireServices().AddService(service);
         }
 
-        private void bt_start_Click(object sender, EventArgs e)
-        {
-            Service service = new GestionnaireServices().Start();
-            this.Display(service);
-
-        }
-
-        private void Display(Service service)
-        {
-            if (service != null)
-            {
-                lbl_id.Text = service.Id.ToString();
-                txt_service.Text = service.Name;
-                lbl_creation_date.Text = service.CreationDate.ToString();
-
-                if (service.UpdateDate.Year != 1)
-                    lbl_update_date.Text = service.UpdateDate.ToShortDateString();
-            }
-        }
-
-        private void bt_previous_Click(object sender, EventArgs e)
-        {
-            if (lbl_id.Text != "" && lbl_id.Text != "-")
-            {
-                Service service = new GestionnaireServices().Previous(int.Parse(lbl_id.Text));
-                this.Display(service);
-            }
-
-        }
-
-        private void bt_next_Click(object sender, EventArgs e)
-        {
-            if (lbl_id.Text != "" && lbl_id.Text != "-")
-            {
-                Service service = new GestionnaireServices().Next(int.Parse(lbl_id.Text));
-                this.Display(service);
-            }
-        }
-
-        private void bt_end_Click(object sender, EventArgs e)
-        {
-            Service service = new GestionnaireServices().End();
-            this.Display(service);
-        }
 
         private void bt_update_Click(object sender, EventArgs e)
         {
@@ -105,14 +62,39 @@ namespace Projet_bloc4.Interfaces.InterfaceServices
                 int id = int.Parse(lbl_id.Text);
                 new GestionnaireServices().DeleteService(id);
 
-                bt_start_Click(this, null);
-
+        
             }
             catch (FormatException)
             {
                 MessageBox.Show("Le label id est vide");
             }
 
+        }
+
+        private void dataGridViewServices_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewServices.CurrentRow.Index != -1)
+            {
+                lbl_id.Text = dataGridViewServices.CurrentRow.Cells[0].Value.ToString();
+                txt_service.Text = dataGridViewServices.CurrentRow.Cells[1].Value.ToString();
+
+            }
+        }
+
+        private void InterfaceServices_Load(object sender, EventArgs e)
+        {
+
+            SqlCommand cmd = new SqlCommand("SELECT Id, name FROM Services", con);
+            con.Open();
+
+
+            //Permet d'afficher la liste des Services dans la dataGrid
+            SqlDataAdapter sdr = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sdr.Fill(dt);
+            dataGridViewServices.DataSource = dt;
+
+            con.Close();
         }
     }
 }
