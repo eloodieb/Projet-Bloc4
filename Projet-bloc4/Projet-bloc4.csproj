@@ -103,6 +103,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>projet4DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="projet4DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>projet4DataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="home.resx">
       <DependentUpon>home.cs</DependentUpon>
@@ -141,6 +146,17 @@
     </None>
     <None Include="projet4DataSet.xss">
       <DependentUpon>projet4DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="projet4DataSet1.xsc">
+      <DependentUpon>projet4DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="projet4DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>projet4DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="projet4DataSet1.xss">
+      <DependentUpon>projet4DataSet1.xsd</DependentUpon>
     </None>
     <None Include="Properties\DataSources\Projet_bloc4.GestionSites.Site.datasource" />
     <None Include="Properties\Settings.settings">

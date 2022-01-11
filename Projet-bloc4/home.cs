@@ -1,5 +1,6 @@
 ﻿using Projet_bloc4.GestionServices;
 using Projet_bloc4.GestionSites;
+using Projet_bloc4.Interfaces;
 using Projet_bloc4.Interfaces.InterfaceEmployees;
 using Projet_bloc4.Interfaces.InterfaceLogin;
 using Projet_bloc4.Interfaces.InterfaceServices;
@@ -8,8 +9,6 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Drawing;
-using Projet_bloc4.Interfaces;
 
 namespace Projet_bloc4
 {
@@ -46,9 +45,9 @@ namespace Projet_bloc4
 
         private void home_Load(object sender, EventArgs e)
         {
-           
 
-            SqlCommand cmd = new SqlCommand("SELECT Employees.Id, Employees.name, firstname, Services.Name, Sites.City, phoneNumber, mobileNumber, email FROM Employees LEFT OUTER JOIN  Sites on (Employees.idSite = Sites.Id) LEFT OUTER JOIN  Services on (Employees.idService = Services.Id)", con);
+
+            SqlCommand cmd = new SqlCommand("SELECT Employees.Id, Employees.name as Nom, firstname as Prénom, Services.Name as Service, Sites.City as Site, phoneNumber, mobileNumber, email FROM Employees LEFT OUTER JOIN  Sites on (Employees.idSite = Sites.Id) LEFT OUTER JOIN  Services on (Employees.idService = Services.Id)", con);
             con.Open();
 
             //Permet d'afficher la liste des clients dans la dataGrid
@@ -69,7 +68,7 @@ namespace Projet_bloc4
             listViewServices.Items.Clear();
             foreach (Service item in service.GetServices())
             {
-                var row = new string[] {item.Name};
+                var row = new string[] { item.Name };
                 var lvi = new ListViewItem(row);
                 lvi.Tag = item;
                 listViewServices.Items.Add(lvi);
@@ -82,7 +81,7 @@ namespace Projet_bloc4
 
             foreach (Site item in site.GetSites())
             {
-                var row = new string[] {item.Name};
+                var row = new string[] { item.Name };
                 var lvi = new ListViewItem(row);
                 lvi.Tag = item;
                 listViewSites.Items.Add(lvi);
@@ -92,13 +91,17 @@ namespace Projet_bloc4
 
         private void txt_search_TextChanged(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("SELECT  Employees.Id, Employees.name, firstname, Services.Name, Sites.City, phoneNumber, mobileNumber, email FROM Employees LEFT OUTER JOIN  Sites on (Employees.idSite = Sites.Id) LEFT OUTER JOIN  Services on (Employees.idService = Services.Id) where Employees.name like '%" + txt_search.Text + "%'", con);
+        
+            SqlCommand cmd = new SqlCommand("SELECT  Employees.Id, Employees.name, firstname, Services.Name, Sites.City, phoneNumber, mobileNumber, email FROM Employees LEFT OUTER JOIN  Sites on (Employees.idSite = Sites.Id) LEFT OUTER JOIN  Services on (Employees.idService = Services.Id) where Employees.name like CONCAT('%',@searchValue,'%')", con);
+           cmd.Parameters.AddWithValue("@searchValue", txt_search.Text.Trim());
+
             con.Open();
             SqlDataAdapter sdr = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
+        
+            DataTable dt = new DataTable(); //Stocker les données
             sdr.Fill(dt);
             dataGridViewEmployees.DataSource = dt;
-            con.Close(); 
+            con.Close();
         }
 
         private void listViewServices_SelectedIndexChanged(object sender, EventArgs e)
@@ -115,7 +118,7 @@ namespace Projet_bloc4
                 dataGridViewEmployees.DataSource = dt;
                 con.Close();
             }
-          
+
             catch
             {
 
@@ -152,25 +155,26 @@ namespace Projet_bloc4
                 login loginForm = new login();
                 this.Hide();
                 loginForm.Show();
-               
-          
+
+
             }
-           
+
         }
 
         public void dataGridViewEmployees_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-         InterfaceEmployeeDetails interfaceEmployeeDetails = new InterfaceEmployeeDetails();
-         interfaceEmployeeDetails.txt_name.Text = dataGridViewEmployees.CurrentRow.Cells[1].Value.ToString();
-         interfaceEmployeeDetails.txt_firstname.Text = dataGridViewEmployees.CurrentRow.Cells[2].Value.ToString();
-         interfaceEmployeeDetails.txt_service.Text = dataGridViewEmployees.CurrentRow.Cells[3].Value.ToString();
-         interfaceEmployeeDetails.txt_site.Text = dataGridViewEmployees.CurrentRow.Cells[4].Value.ToString();
-         interfaceEmployeeDetails.txt_phone.Text = dataGridViewEmployees.CurrentRow.Cells[5].Value.ToString();
-         interfaceEmployeeDetails.txt_mobile_phone.Text = dataGridViewEmployees.CurrentRow.Cells[6].Value.ToString();
-         interfaceEmployeeDetails.txt_email.Text = dataGridViewEmployees.CurrentRow.Cells[7].Value.ToString();
+            InterfaceEmployeeDetails interfaceEmployeeDetails = new InterfaceEmployeeDetails();
+            interfaceEmployeeDetails.lbl_name_employee.Text = dataGridViewEmployees.CurrentRow.Cells[1].Value.ToString();
+            interfaceEmployeeDetails.lbl_firstname_employee.Text = dataGridViewEmployees.CurrentRow.Cells[2].Value.ToString();
+            interfaceEmployeeDetails.lbl_service_employee.Text = dataGridViewEmployees.CurrentRow.Cells[3].Value.ToString();
+            interfaceEmployeeDetails.lbl_site_employee.Text = dataGridViewEmployees.CurrentRow.Cells[4].Value.ToString();
+            interfaceEmployeeDetails.lbl_phone_employee.Text = dataGridViewEmployees.CurrentRow.Cells[5].Value.ToString();
+            interfaceEmployeeDetails.lbl_mobile_employee.Text = dataGridViewEmployees.CurrentRow.Cells[6].Value.ToString();
+            interfaceEmployeeDetails.lbl_email_employee.Text = dataGridViewEmployees.CurrentRow.Cells[7].Value.ToString();
+
             this.Hide();
-         interfaceEmployeeDetails.Show();
+            interfaceEmployeeDetails.Show();
 
         }
     }

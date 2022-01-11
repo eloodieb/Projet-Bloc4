@@ -18,11 +18,9 @@ namespace Projet_bloc4.GestionEmployees
         public int AddEmployee(Employee employee)
         {
             if (employee.Id != 0)
-                throw new AddExistingEmployeeException("Impossible d'ajouter un employé déjà existant");
+                MessageBox.Show("Impossible d'ajouter un employé déjà existant");
             else
             {
-
-                employee.CreationDate = DateTime.Now;
 
                 //Ouverture de la connexion
                 con.Open();
@@ -38,8 +36,8 @@ namespace Projet_bloc4.GestionEmployees
 
 
                 //Exécute la requête sql
-               cmd.ExecuteNonQuery();
-           
+                cmd.ExecuteNonQuery();
+
                 // Fermeture Connexion
                 con.Close();
 
@@ -50,13 +48,10 @@ namespace Projet_bloc4.GestionEmployees
         public void UpdateEmployee(Employee employee)
         {
             if (employee.Id == 0)
-                throw new UpdateInexistingEmployee("Vous essayez de modifier un service inexistant");
+                MessageBox.Show("Vous essayez de modifier un service inexistant");
 
 
-            employee.UpdateDate = DateTime.Now;
-
-
-            SqlCommand cmd = new SqlCommand("Update Employes Set name = @name, firstname = @firstname, phoneNumber = @phoneNumber, mobileNumber = @mobileNumber, email = @email, idSite = @idSite, idService = @idService", con);
+            SqlCommand cmd = new SqlCommand("Update Employees Set name = @name, firstname = @firstname, phoneNumber = @phoneNumber, mobileNumber = @mobileNumber, email = @email, idSite = @idSite, idService = @idService WHERE Id = @id", con);
 
             cmd.Parameters.AddWithValue("@name", employee.Name);
             cmd.Parameters.AddWithValue("@firstname", employee.Firstname);
@@ -65,6 +60,7 @@ namespace Projet_bloc4.GestionEmployees
             cmd.Parameters.AddWithValue("@email", employee.Email);
             cmd.Parameters.AddWithValue("@idSite", employee.Site);
             cmd.Parameters.AddWithValue("@idService", employee.Service);
+            cmd.Parameters.AddWithValue("@id", employee.Id);
 
             //Exécute la requête sql
             con.Open();
@@ -83,7 +79,8 @@ namespace Projet_bloc4.GestionEmployees
         {
             Employee employee = this.SearchEmployeeById(id);
 
-            SqlCommand cmd = new SqlCommand("Delete from Employees where Id = employee.Id", con);
+            SqlCommand cmd = new SqlCommand("Delete from Employees where Id = @Id", con);
+            cmd.Parameters.AddWithValue("@id", employee.Id);
 
             con.Open();
             //Exécute la requête sql
@@ -136,40 +133,6 @@ namespace Projet_bloc4.GestionEmployees
             return list_employees;
         }
 
-        public Employee Start()
-        {
-            if (GetEmployees().Count > 0)
-                return GetEmployees()[0];
-            else
-                return null;
-        }
 
-        public Employee Next(int id)
-        {
-            Employee employee = this.SearchEmployeeById(id);
-            int index = GetEmployees().IndexOf(employee);
-            if ((GetEmployees().Count - 1) >= (index + 1))
-                return GetEmployees()[index + 1];
-            else
-                return null;
-        }
-
-        public Employee Previous(int id)
-        {
-            Employee employee = this.SearchEmployeeById(id);
-            int index = GetEmployees().IndexOf(employee);
-            if ((GetEmployees().Count - 1) >= (index - 1) && index > 0)
-                return GetEmployees()[index - 1];
-            else
-                return null;
-        }
-
-        public Employee End()
-        {
-            if (GetEmployees().Count > 0)
-                return GetEmployees()[GetEmployees().Count - 1];
-            else
-                return null;
-        }
     }
 }
